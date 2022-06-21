@@ -2,7 +2,22 @@ FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y rsync htop git openssh-server
-
+RUN apt-get install -y --allow-downgrades --allow-change-held-packages --no-install-recommends \
+        build-essential \
+        cmake \
+        git \
+        curl \
+        vim \
+        tmux \
+        wget \
+        bzip2 \
+        unzip \
+        g++ \
+        ca-certificates \
+        ffmpeg \
+        libx264-dev \
+        imagemagick \
+        libnss3-dev
 RUN apt-get install python3-pip -y
 RUN ln -s /usr/bin/python3 /usr/bin/python
 #RUN pip3 install --upgrade pip
@@ -22,6 +37,7 @@ RUN pip install opencv-python==4.4.0.42 opencv-python-headless==4.4.0.42
 RUN pip install --upgrade traitlets==4.3.3 jedi==0.17.2 pyparsing==2.4.7 pygments==2.7.4 notebook==6.2.0 qtconsole==4.7.7 nbconvert jupyter jupyterlab==0.34.0
 RUN pip install --upgrade jupyter_contrib_nbextensions jupyterlab-git
 RUN pip install -I jinja2==2.11.3
+RUN pip install dlib
 
 #pix2pixHD, required for initializing training
 RUN git clone https://github.com/NVIDIA/pix2pixHD /notebooks/pix2pixHD
